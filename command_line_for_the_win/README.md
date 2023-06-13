@@ -1,6 +1,6 @@
 # Command line for the win
 
-## 0-first_9_tasks
+## 0-first_9_tasks.png
 ```bash
 echo "hello world"
 ```
@@ -37,7 +37,7 @@ cp take-the-command-challenge tmp/files/
 mv take-the-command-challenge tmp/files/
 ```
 
-## 1-next_9_tasks
+## 1-next_9_tasks.png
 
 ```bash
 ln -s tmp/files/take-the-command-challenge take-the-command-challenge
@@ -76,7 +76,7 @@ grep -rhoE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" --include="access.log*" . | sort -u
 find . -maxdepth 1 -type f | wc -l
 ```
 
-##2-next_9_tasks
+## 2-next_9_tasks.png
 
 ```bash
 sort access.log

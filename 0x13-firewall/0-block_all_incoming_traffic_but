@@ -1,4 +1,27 @@
+# Install ufw if not installed
+sudo apt-get update
+sudo apt-get install -y ufw
+
+# Enable IPv6 in ufw if it's not already enabled
+sudo sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
+
+# Reset and apply ufw rules
+sudo ufw --force reset
+
+# set default policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# Allow SSH, HTTP, and HTTPS traffic
 sudo ufw allow 22/tcp
-sudo ufw allow 80/tcp
 sudo ufw allow 443/tcp
-sudo ufw enable
+sudo ufw allow 80/tcp
+
+# Verify which rules were added
+sudo ufw show added
+
+# Enable ufw
+sudo ufw enable -y
+
+# Display ufw status for verification
+sudo ufw status verbose

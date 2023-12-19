@@ -2,11 +2,6 @@
 # Configures a ufw firewall to block all incoming traffic
 #+ except for TCP ports 22, 443, and 80.
 
-# Check for root privileges before proceeding
-if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root." 
-    exit 1
-fi
 
 # Install ufw if not installed
 apt-get update
@@ -16,10 +11,19 @@ apt-get install -y ufw
 sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
 
 # Reset and apply ufw rules
-ufw reset --force
+ufw --force reset
+
+# set default policies
 ufw default deny incoming
 ufw default allow outgoing
+
+# Allow SSH, HTTP, and HTTPS traffic
 ufw allow 22/tcp
 ufw allow 443/tcp
 ufw allow 80/tcp
+
+# enable ufw forcefully
 ufw --force enable
+
+# Display ufw status for verification
+ufw status verbose

@@ -1,18 +1,19 @@
 #!/usr/bin/python3
-"""
-this doc for module
-"""
+""" Function that queries the Reddit API """
 import requests
-
-headers = {"User-Agent": "MyCustomUserAgent/1.0"}
+import sys
 
 
 def number_of_subscribers(subreddit):
-    """method doc"""
+    """  Args:
+        subreddit: subreddit name
+    Returns:
+        number of subscribers to the subreddit,
+        or 0 if subreddit requested is invalid"""
+    headers = {'User-Agent': 'xica369'}
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    response = requests.get(url, allow_redirects=False, headers=headers)
+    response = requests.get(url, headers=headers, allow_redirects=False)
+
     if response.status_code == 200:
-        data = response.json()
-        return data["data"]["subscribers"]
-    else:
-        return 0
+        return (response.json().get("data").get("subscribers"))
+    return (0)

@@ -1,19 +1,21 @@
 #!/usr/bin/python3
-"""
-this doc for module
-"""
+""" Function that queries the Reddit API """
 import requests
-
-headers = {"User-Agent": "MyCustomUserAgent/1.0"}
+import sys
 
 
 def top_ten(subreddit):
-    """method doc"""
-    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-    response = requests.get(url, allow_redirects=False, headers=headers)
+    """ Returns: top ten post titles
+        or None if queried subreddit is invalid """
+    headers = {'User-Agent': 'xica369'}
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    parameters = {'limit': 10}
+    response = requests.get(url, headers=headers, allow_redirects=False,
+                            params=parameters)
+
     if response.status_code == 200:
-        data = response.json()
-        for post in data["data"]["children"]:
-            print(post["data"]["title"])
+        titles_ = response.json().get('data').get('children')
+        for title_ in titles_:
+            print(title_.get('data').get('title'))
     else:
-        print("None")
+        print(None)

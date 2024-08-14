@@ -1,8 +1,8 @@
-![img](https://assets.imaginablefutures.com/media/images/ALX_Logo.max-200x150.png)
+![img](./alxlogo.png)
 
 > Web stack monitoring #3
 
-![six-stages-of-debuging](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-sysadmin_devops/293/d42WuBh.png)
+![six-stages-of-debuging](./message.png)
 
 ## Background Context
 

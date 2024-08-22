@@ -1,14 +1,27 @@
-# This is the Nginx configuration file for serving the Flask application.
-
 server {
-    listen 80;  # Listen on port 80 for HTTP requests
-    server_name _;  # Default server
+	listen 80 default_server;
+	listen [::]:80 default_server;
 
-    location /airbnb-onepage/ {
-        proxy_pass http://127.0.0.1:5000;  # Proxy requests to the application running on port 5000
-        proxy_set_header Host $host;  # Set the Host header
-        proxy_set_header X-Real-IP $remote_addr;  # Set the X-Real-IP header
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;  # Set the X-Forwarded-For header
-        proxy_set_header X-Forwarded-Proto $scheme;  # Set the X-Forwarded-Proto header
-    }
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location / {
+		try_files $uri $uri/ =404;
+	}
+
+	location /airbnb-onepage/ {
+		proxy_pass http://localhost:5000;
+	}
+
+	if ($request_filename ~ redirect_me){
+		rewrite ^ https://sketchfab.com/bluepeno/models permanent;
+	}
+
+	error_page 404 /404.html;
+	location = /404.html {
+		root /var/www/error/;
+		internal;
+	}
 }
